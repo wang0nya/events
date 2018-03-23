@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title></ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-row padding>
+    <ion-col col-8>Current Revenue</ion-col>
+    <ion-col col-4 [class.profitable]="currentEvent?.revenue > 0" [class.no-profit]="currentEvent?.revenue < 0">
+      {{currentEvent?.revenue}}
+    </ion-col>
+  </ion-row>
+  <ion-card>
+    <ion-card-header>{{currentEvent?.name}}</ion-card-header>
+    <ion-card-content>
+      <p>Ticket:
+        <strong>${{currentEvent?.price}}</strong>
+      </p>
+      <p>Date:
+        <strong>{{currentEvent?.date}}</strong>
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="add-guest-form">
+    <ion-card-header>
+      Add Guests
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col col-8>
+          <ion-item>
+            <ion-label stacked>Name</ion-label>
+            <ion-input [(ngModel)]="guestName" type="text" placeholder="What's your guest's name?"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col col-4>
+          <button ion-button icon-only (click)="takePicture()">
+            <ion-icon name="camera"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+      <span *ngIf="guestPicture">Picture taken!</span>
+      <button ion-button color="primary" block (click)="addGuest(guestName)" [disabled]="!guestName">
+        Add Guest
+      </button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
